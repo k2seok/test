@@ -642,44 +642,48 @@ var lang = {
   SIGNUP_PHONE : ["휴대폰 번호", "PHONE NUMBER", "PHONE NUMBER"],
   SIGNUP_AUTH : ["인증번호", "AUTHENTICATION NUMBER", "AUTHENTICATION NUMBER"],
 
-	LANG_1_1:["* 거주자 인증 시 거주지 주소의 중복 이미지를 첨부해야 합니다","* You need to attach duplicated image of your residence address","您必须在居住地附上居住地址的重复图像"],
-	LANG_1_2:["* 거주지를 확인할 때 입력하는 모든 정보는 식별 목적으로만 사용됩니다.","* All information that you input is used to verify your residence only","您在检查住所时输入的任何信息仅用于识别目的。"],
-	LANG_1_3:["* 거주 증명서는 반드시 당신의 성명을 증명한 사본에 써야 합니다.","* residence certification should contain your name","您的居住证必须在您的姓名的经过认证的副本上"],
-	LANG_2_1:["* 서약서 작성 시 입력되는 모든 정보는 신원 확인 목적으로만 사용됩니다.",
-			  "* All the informations written for the pledge form is used for user verification only. ",
-			  "* 撰写质押时输入的所有信息仅用于识别目的"],
-	LANG_2_2:["* 서약서는 본인이 작성하셔야 합니다.",
-			  "* Pledge form should be written by one's self",
-			  "* 承诺必须由您完成"],
-	LANG_3:["[모바일 다운로드] SOiVA EXCHANGE앱을 스마트폰에 설치해서 사용하세요","[download] Install to use SOiVA EXCHANGE app","[下载]在智能手机上安装并使用SOiVA EXCHANGE应用程序"],
-	LANG_4:["※ 총 수령금액은 수수료를 제외한 금액입니다.","※Total reception is an amount excluding fees.","取款金额中不含手续费。"],
-	LANG_5:["※ 총 수신수량은 수수료를 제외한 금액입니다.","※Total reception is an amount excluding fees.","取款金额中不含手续费。"],
-	LANG_6:["① 회원명 [Name] :","",""],
-	LANG_7:["1. 이용자 기본 정보 사항[Basic Information]","",""],
-	LANG_8:["동일한 계정으로 타 사용자가 접속 중입니다.","Another user is logged on with your ID","其他用户正在访问同一帐户"],
-	LANG_8_1:["[경고창 발생원인]","[Reason for alert message box]","警告窗口的原因"],
-	LANG_8_2:["1. 정상적인 로그아웃을 하지 않았을경우 발생(10분 이내)","1. You have not logged out properly(within 10min)","1. 未发生正常注销时发生。(10分钟内)"],
-	LANG_8_3:["2. 타 사용자가 접속시도중인 계정으로 로그인 한 경우","2. Other user is logged in","2. 您使用其他用户尝试访问的帐户登录"],
-	LANG_8_4:["※해킹 의심시 패스워드 변경을 권고 드립니다","※If your ID is suspicious for hacking, please change your password","※我们建议您在怀疑黑客时更改密码"],
-	LANG_9:["1. ㈜템트리에서 회원님들께 개별적으로 로그인 할 수 있는 임시 ID가 부여됩니다. 2. 소이바 마켓플레이스(거래소)에서는 팝업창이 만들어져 있으니, [㈜템트리에게 “개인정보수집 이용에 관한 동의” 즉, “개인정보 수집 및 활용에 관한 동의”와 “수집한 개인정보를 제3자(소이바텔레콤)에 제공한다는 동의”]를 필히 확인하여야 합니다. 일정기간 동의하지 않는 회원분들은 ㈜템트리에서 개인 정보를 제공할 수가 없어서 계정이 미이관되거나 삭제됩니다.3. 1항에 동의한 회원분에 한하여 ㈜템트리에서 각 회원분들에게 부여한 임시 ID로 로그인이 됩니다.4. 로그인 한 후 개인정보 보안을 위하여 비밀번호를 변경하고, 은행계좌를 연동한 후 전자지갑을 생성하여 주십시요5. 전자지갑이 생성되어야 칸밸류가 지급됩니다.이와 같은 과정은 회원분들의 개인정보와 칸밸류의 재산을 보호하기 위한 필수적인 절차이니 번거롭더라도 협조 당부드립니다감사합니다.","",""],
-	LANG_10_1:["1. 회사는 ","1. Company","1.在确认"],
-	LANG_10_2:["의 기술적 결함 또는 블록체인의 안정화 실패 등을 확인하는 즉시 회원의 사전동의 없이 거래를 중단시킬 수 있습니다.",
-			   " can stop trading without customers' agreement if there is technical problem, blockchain stablize failure or other issues are found ",
-			   "技术故障或未能稳定区块链后，公司可以在未经会员事先同意的情况下暂停交易"],
-	LANG_11:["1. 회사는 회원의 기술적 결함을 확인한 후 회원의 사전 동의없이 거래를 중지 할 수 있습니다.",
-			 "1. Company can check technical issue and stop the trade without customers' agreement.",
-			 "1. 在确认会员的技术缺陷后，公司可以在未经会员事先同意的情况下终止交易"],
-	LANG_12:["1:1문의","1:1 Inquiries","1：1咨询"],
-	LANG_13:["② 연락처 [Contact Number] :","",""],
-	LANG_14:["2. 이용자 서약 사항","",""],
-	LANG_15:["③ 출금 계좌 은행 [Bank Name] :","",""],
-	LANG_16:["④ 출금 계좌 정보 [Bang Account Details] :","",""],
-	LANG_17_1:["SOIVA글로벌 인증기술은 블록체인(비트코인 등)이 아닙니다. ",
-			 "SOIVA global authentication technology is not block-chain(ex. bitcoin)",
-			 "SOIVA全球认证技术不是块链（比特币等）。"],
-	LANG_17_2:["중국 등 블록체인을 금지하는 국가에서도 사용될 수 있는 서비스 기술입니다.",
-			 "It is technolodge service that is allowed to use in such countries like China that disallows block-chain",
-			 "它是一种服务技术，可用于禁止中国等区块链的国家。"],
+	LANG_1_1:["* 거주자 인증 시 거주지 주소의 중복 이미지를 첨부해야 합니다","* You need to attach duplicated image of your residence address","您必须在居住地附上居住地址的重复图像", "*居住者認証の時、居住地住所の重複イメージを添付しなければなりません。"],
+  LANG_1_2:["* 거주지를 확인할 때 입력하는 모든 정보는 식별 목적으로만 사용됩니다.","* All information that you input is used to verify your residence only","您在检查住所时输入的任何信息仅用于识别目的。", "*誓約書作成時に入力されるすべての情報は、身元の確認目的だけに使用されます。", "*居住地を確認する際に入力する全ての情報は、識別目的だけに使用されます。"],
+  LANG_1_3:["* 거주 증명서는 반드시 당신의 성명을 증명한 사본에 써야 합니다.","* residence certification should contain your name","您的居住证必须在您的姓名的经过认证的副本上", "*居住証明書は必ずあなたの氏名を証明した写本に使わなければなりません。"],
+  LANG_2_1:["* 서약서 작성 시 입력되는 모든 정보는 신원 확인 목적으로만 사용됩니다.",
+        "* All the informations written for the pledge form is used for user verification only. ",
+        "* 撰写质押时输入的所有信息仅用于识别目的", "*誓約書作成時に入力されるすべての情報は、身元の確認目的だけに使用されます。"],
+  LANG_2_2:["* 서약서는 본인이 작성하셔야 합니다.",
+        "* Pledge form should be written by one's self",
+        "* 承诺必须由您完成"],
+  LANG_3:["[모바일 다운로드] SOiVA EXCHANGE앱을 스마트폰에 설치해서 사용하세요","[download] Install to use SOiVA EXCHANGE app
+","[手机下载]在智能手机上安装并使用SOiVA EXCHANGE应用程序。","[モバイルダウンロード]SOiVA EXCHANGEアプリを携帯電話に設置して使用してください。"],"
+LANG_4:["※ 총 수령금액은 수수료를 제외한 금액입니다.","※ Total received amount is excluded of fee.","※ 总受理数量中不包含手续费。","※総受領金額は手数料を除いた金額です。"],
+LANG_5:["※ 총 수신수량은 수수료를 제외한 금액입니다.","※ Total received quantity is excluded of fee.","※ 总受理数量中不包含手续费。","※総受信数量は手数料を除いた金額です。"],
+LANG_6:["① 회원명 [Name] :","Name of member","① 会员名 :","①　会員名[Name]:"],
+LANG_7:["1. 이용자 기본 정보 사항[Basic Information]","Basic information of user","1、用户基本信息","1. 利用者基本情報事項[Basic Information]"],
+LANG_8:["1. 정상적인 로그아웃을 하지 않았을경우 발생(10분 이내) 2. 타 사용자가 접속시도중인 계정으로 로그인 한 경우 ※해킹 의심시 패스워드 변경을 권고 드립니다","1.Occurred because of abnormal log out(within 10 minutes)                                              2. Somebody logged in with your ID               * Please change your password if it is suspected of hacking.","1、账号未正常退出时（10分钟以内） 2. 其他用户正在登陆此账号时 ※疑似盗号情况发生时，建议您立即更改密码","1. 正常なログアウトをしなかった場合、発生(10分以内)　2.他使用者がアクセス中の自分のアカウントでログインした場合 ※ハッキングの疑いのあるとき、パスワードを変更をお勧めします。", "1. 正常なログアウトをしなかった場合、発生(10分以内)　2.他使用者がアクセス中の自分のアカウントでログインした場合 ※ハッキングの疑いのあるとき、パスワードを変更をお勧めします。"],
+LANG_9:["1. ㈜템트리에서 회원님들께 개별적으로 로그인 할 수 있는 임시 ID가 부여됩니다. 
+2. 소이바VMS마켓플레이스(거래소)에서는 팝업창이 만들어져 있으니, [㈜템트리에게 “개인정보수집 이용에 관한 동의” 즉, “개인정보 수집 및 활용에 관한 동의”와 “수집한 개인정보를 제3자(소이바텔레콤)에 제공한다는 동의”]를 필히 확인하여야 합니다. 일정기간 동의하지 않는 회원분들은 ㈜템트리에서 개인 정보를 제공할 수가 없어서 계정이 미이관되거나 삭제됩니다.
+3. 1항에 동의한 회원분에 한하여 ㈜템트리에서 각 회원분들에게 부여한 임시 ID로 로그인이 됩니다.
+4. 로그인 한 후 개인정보 보안을 위하여 비밀번호를 변경하고, 은행계좌를 연동한 후 전자지갑을 생성하여 주십시요
+5. 전자지갑이 생성되어야 칸밸류가 지급됩니다.
+
+이와 같은 과정은 회원분들의 개인정보와 칸밸류의 재산을 보호하기 위한 필수적인 절차이니 번거롭더라도 협조 당부드립니다
+감사합니다.", "", "1、TemTree会员们可以使用的临时ID 。
+2、在SOiVA VMS市场（交易所）弹出窗口中，必须确认[对TemTree有限公司“个人信息受理使用的相关条例同意”，即“个人信息受理及使用的相关条例同意”和“同意个人信息向在第三方（SOiVA Telecom公司）提供”]。在一段时间内，会员们不同意提供TemTree的个人信息的话，因此会未移交或删除账户。
+3、已同意第一项的TemTree会员，使用临时ID登录即可。
+4、登录后为了个人信息的安全，请更改密码，并绑定银行账户以创建电子钱包。
+5、创建电子钱包后才可进行支付。
+
+以上过程中，是为了保护会员的个人信息和财产的必要过程，请协助合作。非常感谢！, ""],
+
+LANG_10:["1. 회사는 OO의 기술적 결함 또는 블록체인의 안정화 실패 등을 확인하는 즉시 회원의 사전동의 없이 거래를 중단시킬 수 있습니다.","","1、由产品技术缺陷或安全性失效，公司可立即停止客户交易，而无须事先通知。","1.会社はOOの技術的欠陥、もしくは安定化の失敗などが見つかった場合、直ちに会員の事前同意なしに取引を中断させることができます。"
+, "1.会社はOOの技術的欠陥、もしくは安定化の失敗などが見つかった場合、直ちに会員の事前同意なしに取引を中断させることができます。"],
+LANG_11:["1. 회사는 회원의 기술적 결함을 확인한 후 회원의 사전 동의없이 거래를 중지 할 수 있습니다. 회사는이 프로세스로 인한 가격 하락이나 평가 손실에 대해 책임지지 않습니다.","","1、确认会员的技术操作缺陷后，公司可立即停止客户交易，而无须事先通知。公司不承担在这一过程中价格下降或评估损失等相关责任。","1.会社は○○の技術的欠陥を確認した後、会員の事前同意なしに、取引を中止することができます。 会社はこのプロセスによる価格の下落や評価損失について責任を負いません。"
+, "1.会社は○○の技術的欠陥を確認した後、会員の事前同意なしに、取引を中止することができます。 会社はこのプロセスによる価格の下落や評価損失について責任を負いません。"],
+LANG_12:["1:1문의","1:1 Inquiry","1：1咨询","1:1　お問い合わせ", "1:1　お問い合わせ"],
+LANG_13:["② 연락처 [Contact Number] :","Contact number","② 联系方式 :","② 連絡先 [Contact Number] :", "② 連絡先 [Contact Number] :"],
+LANG_14:["2. 이용자 서약 사항","User pledge","2、用户保证事项","2.　利用者誓約事項","2.　利用者誓約事項"],
+LANG_15:["③ 출금 계좌 은행 [Bank Name] :","Name of withdrawal bank","③ 取款账号银行 :","③　出金口座銀行[Bank Name]:"],
+LANG_16:["④ 출금 계좌 정보 [Bang Account Details] :","Information of withdrawal bank","④ 取款账号信息 :","④　出金口座情報[Bang Account Details]:"],
+LANG_17_1:["SOIVA글로벌 인증기술은 블록체인(비트코인등.)이 아닙니다.","SOiVA certification technology is not block-chain based.","SOIVA全球认证技术不是块链（比特币等）","SOIVAグローバル認証技術はブロックチェイン(ビットコインなど。)ではありません。"],
+LANG_17_2:["중국등 블록체인을 금지하는 국가에서도 사용될수있는 서비스 기술입니다"," It can function even in a country such as China that is prohibiting block-chain.","它是一种服务技术，可用于禁止中国等区块链的国家。","中国などブロックチェーンを禁止する国家でも利用できるサービス技術です。"],
 	LANG_18:["⑤ 거래목적 및 성격[Type of business] :","",""],
 	LANG_19:["E-mail 수신 동의","Agree to receive E-mail","电子邮件接收协议"],
 	LANG_20:["Google Authenticator 사용방법 보기","How to use Google Authenticator","了解如何使用Google身份验证器"],
