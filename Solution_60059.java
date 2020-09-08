@@ -1,5 +1,6 @@
 package kakao2020blindTest;
 
+
 public class Solution_60059 {
 	/**
 	 * 자물쇠와 열쇠 2차원 배열 key, lock 에서 key 를 회전, 방향 이동 할 수있는 모든 경우의수를 찾은 뒤 key 1 이 lock
@@ -67,26 +68,21 @@ public class Solution_60059 {
 
 			// check
 			for (int i = 0; i < cntK; i++) {
+				//i 번째 키 꺼내기
 				int[] nowK = nowKeyArr[i].clone();
-				int nowCnt = cntK;
+				int nowCnt = cntK;	// 남은 count 수
 
 				for (int idx = 0; idx < cntL; idx++) {
 					int[] nowL = lockArr[idx];
 
-					// move
+					// move : idx 번째 열쇠구멍에 맞춘다는 가정
 					int nowI = nowL[0] - nowK[0];
 					int nowJ = nowL[1] - nowK[1];
 
-					nowK[0] += nowI;
-					nowK[1] += nowJ;
+					//nowK[0] += nowI;
+					//nowK[1] += nowJ;
 
-					nowCnt--;
-					if (nowCnt < 1)// end
-						return false;
-					else
-						answer = nextCal(i + 1, new int[] { nowI, nowJ }, nowCnt) ? true : false;
-					// nextcal
-					// if(nowK == _KEY nowL[i][j] == _LOCK
+					answer = isEnd(key.clone(), new int[] {nowI,nowJ}, nowCnt - 1);
 					
 					if(answer)
 						return answer;
@@ -100,26 +96,35 @@ public class Solution_60059 {
 
 	}
 
-	private boolean nextCal(int keyIdx, int[] nowMove, int nowCnt) {
-
-		if (keyIdx >= cntK) // end
-			return false;
-		// 1 method cal
-		int[] nowK = nowKeyArr[keyIdx];
-
-		// int[] nowL = lockArr[idx];
-
-		// TODO : find Eq
-		if(fieldLock[nowK[0]][nowK[1]] == _LOCK)
-			nowCnt--;
-		if (nowCnt < 1) {// end
-
-			return true;
+	private boolean isEnd(final int[][] key, int[] move, int lockCnt) {
+		int length = key[0].length;
+		int[][] nowKey = new int[length][length];
+		//key 이동
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < length; j++) {
+				//move 만큼 현재의 nowKey value들 이동
+				if(i + move[0] >= 0 && i + move[0] < length && j + move[1] >= 0 && j + move[1] < length)
+					nowKey[i + move[0]][j+ move[1]] = key[i][j];
+				
+			}
 		}
-		return nextCal(keyIdx + 1, nowMove, nowCnt);
-		// nextcal
-		// if(nowK == _KEY nowL[i][j] == _LOCK
-		// nowK[i]
+		// 일치확인 
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < length ; j++) {	
+				if(fieldLock[i][j] != _LOCK && nowKey[i][j] == _KEY)
+					return false;
+				if(fieldLock[i][j] == _LOCK && nowKey[i][j] == _KEY) {
+					lockCnt--;
+					if(lockCnt < 1)
+						return true;
+				}
+			}
+		}
+		
+		
+		return false;
 	}
+
+
 
 }
