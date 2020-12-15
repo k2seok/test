@@ -1,27 +1,29 @@
 package programmers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class programmers_49191 {
 
-	// 4 , 3 = 1 //win
-	// 3, 4 = -1 // loose
-
-
 	static int answer = 0;
-	static final int W = 1;
-	static final int L = 2;
 
 	static int[][] map = null;
-	static boolean[] visit = null;
+	static boolean[] ranker = null;
 
 	public int solution(int n, int[][] results) {
 
 		map = new int[n + 1][n + 1];
-		visit = new boolean[n+1];
+		ranker = new boolean[n + 1];
+
+		int arr[] = new int[n + 1];
 
 		List<Integer> list = new LinkedList<Integer>();
+		// init
+		for (int i = 1; i <= n; i++) {
+			list.add(i);
+		}
+
 		// abs win + loose == n -1이면 정확한 순위 확인 가능
 		for (int i = 0; i < results.length; i++) {
 			int[] r = results[i];
@@ -29,64 +31,57 @@ public class programmers_49191 {
 			map[r[0]][r[1]] = 1;
 			map[r[1]][r[0]] = -1;
 
-
-			if (!list.contains(r[0]))
-				list.add(r[0]);
-
-			if (!list.contains(r[1]))
-				list.add(r[1]);
+			arr[r[0]]++;
+			arr[r[1]]++;
 		}
 
-		calRank(n, list, 0);
+		calRank(arr.clone(), list);
 
 		return answer;
 	}
 
-	// pNode is not use
-	private void calRank(int n, List<Integer> list, int pNode) {
-		// n -1 == 0 이면, 승수 확인 가능
+	private void calRank(int[] result, List<Integer> list) {
+		if(list.size() < 1)
+			return;
 		if (list.size() == 1) {
-			if(visit[list.get(0)])
-				return;
-			visit[list.get(0)] = true;
+			// 1명인 경우 결과 정해짐
 			answer++;
+			ranker[list.get(0)] = true;
 			return;
 		}
 
-		for (int i = 0; i < list.size(); i++) {
-			int node = list.get(i);
-			if(visit[node])
-				continue;
-			int count = 0;
-			for (int j = 0; j < list.size(); j++) {
-				if (i == j)
-					continue;
+		int need = list.size() - 1;
 
-				if (map[node][list.get(j)] != 0)
-					count++;
-			}
+		for (int now : list) {
+			int min = result[now];
 
-			// 간선개수 확인 결과
-			if (count == n - 1) {
-				
-				visit[node] = true;
+			if (min >= need) { // now ranker
 				answer++;
-				// next
+				ranker[now] = true;
+				
+				List<Integer> wList = new ArrayList<Integer>();
+				List<Integer> lList = new ArrayList<Integer>();
+				int[] nextR = result.clone();
+				nextR[now] = 0;
 
-				// Next Node
-				List<Integer> setUp = new LinkedList<Integer>();
-				List<Integer> setDown = new LinkedList<Integer>();
+				// next init
+				for (int j : list) {
+					if(ranker[j])
+						continue; // 이미 등록된 값
+					
+					if (map[now][j] > 0) {
+						lList.add(j);
+						nextR[j]--;
 
-				for (int j = 1; j < map.length; j++) {
-					if (map[node][j] == 1) // down
-						setDown.add(j);
-					else if (map[node][j] == -1) // up
-						setUp.add(j);
+					} else if (map[now][j] < 0) { // i 가 j 에게 졌음
+						wList.add(j);
+						nextR[j]--;
+					}
 				}
 
-				calRank(setUp.size(), setUp, node);
-				calRank(setDown.size(), setDown, node);
-
+				calRank(nextR, wList);
+				calRank(nextR, lList);
+				break;
 			}
 		}
 	}

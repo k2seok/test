@@ -15,8 +15,8 @@ public class programmers_42898 {
 //		final int J = m + 1;
 		int answer = 0;
 
+		int[][] map = new int[n+1][m+1];
 		boolean[][] visit = new boolean[n + 1][m + 1];
-		;
 		int[] end = new int[] { n, m };
 
 		for (int k = 0; k < puddles.length; k++) {
@@ -43,17 +43,24 @@ public class programmers_42898 {
 				if (!exit) {// next : 한번이라도 도착한 경우, 다음 계산이 의미없음
 					if (now[1] + 1 <= m) { // down
 						int next[] = new int[] { now[0], now[1] + 1 };
-						if (!visit[next[0]][next[1]]) {
-							queue.add(next);
-						}
+						
+						if (map[next[0]][next[1]] < 0)
+							continue;
+						if (visit[next[0]][next[1]]) // 이미 조회
+							continue;
+						queue.add(next);
+						visit[next[0]][next[1]] = true;
+						map[next[0]][next[1]] += map[now[0]][now[1]];
 					}
 
 					if (now[0] + 1 <= n) { // right
 						int next[] = new int[] { now[0] + 1, now[1] };
-						if (!visit[next[0]][next[1]]) {
-							queue.add(next);
-						}
+						
+						if (map[next[0]][next[1]] < 0)
+							continue;
+						map[next[0]][next[1]] += map[now[0]][now[1]];
 					}
+
 
 				}
 
