@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class Main {
-
+public class acmicpc_10942 {
+//Main
 	/**
 	 * 10942 펠린드롬? 목표 : N 개의 자연수 나열된값중 M개의 질문을 통해 펠린드롬인지 t/f 반환
 	 * 

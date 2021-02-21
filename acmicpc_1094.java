@@ -1,7 +1,7 @@
 import java.util.*;
 
 ////https://www.acmicpc.net/problem/1094
-public class Main {
+public class acmicpc_1094 {
     	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		boolean arr[] = new boolean[6];
