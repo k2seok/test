@@ -1,65 +1,77 @@
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 public class programmers_42579 {
 
-	/**
-	 * ** 
-	 * 1) genres 에서 hashMap key value add 2) key
-	 * 
-	 * @param N
-	 * @param number
-	 * @return
-	 */
-	class playData {
-		playData prev;
-		playData next;
-		int v;
+	final static int IDX_MAX = 10000;
+	static int genresCnt;
 
-		public playData(int v) {
-			this.v = v;
+	public static class gen {
+		String name = "";
+		int num;
+		Vector<Integer> plays = new Vector<Integer>();
+
+		public gen(String name, int num) {
+			this.name = name;
+			this.num = num;
+			plays.add(num);
+		}
+
+		public void sort() {
+			Arrays.sort(plays.toArray());
 		}
 
 	}
 
-	final static int IDX_MAX = 10000;
-	static int genresCnt;
-
 	public static int[] solution(String[] genres, int[] plays) {
 		genresCnt = 0;
-		int[] answer = {};
+		int[] answer = new int[4];
 
-		int[] map = new int[IDX_MAX * 100];
-		Vector<String> genV = new Vector<String>();
-		
-//		for (int idx = 0; idx < genresCnt + 1; idx++) { // find idx
-//			int idx_Gen = 0;
-//			String gen = genres[idx];
-//			while(idx_Gen < genresCnt) {
-//				if(map[idx_Gen] gen)
-//				idx_Gen+=IDX_MAX;
-//			}
-//			for (int idx_Gen = 0; idx_Gen < map.length; idx_Gen+=IDX_MAX) {
-//				//idx_Gen
-//			}
-//			if (genV.contains(genres[idx])) // exist{
-//			{
-//				int nowV = plays[idx];
-//				for (int prevV : map.get(genres[idx])) {
-//					if (prevV < nowV)
-//						;
-//
-//				}
-//
-//			} else {
-//				
-//				genV.add(genres[idx]);
-//				
-////				map[genV.size()*IDX_MAX+1] = new playData(plays[idx]);
-////				map.put(genres[idx], data);
-//			}
-//		}
+		HashMap<String, gen> map = new HashMap<String, gen>();
+		// 1. 최고 재생된 장르 : plays[i]의 모든 gneres[i] 의 합
+		for (int i = 0; i < genres.length; i++) {
+
+			String gen = genres[i];
+			int play = plays[i];
+
+			if (map.containsKey(gen)) {// exist
+				gen now = map.get(gen);
+				now.num += plays[i];
+				now.plays.add(play);
+
+			} else { // exist
+				map.put(gen, new gen(gen, play));
+			}
+		}
+
+		// 2. 장르 내 가장 plays[i] 가 가장 큰 값 2개
+		for (int i = 0; i < 2; i++) {
+			int max = 0;
+			String maxKey = "";
+			for (gen now : map.values()) {
+				if (now.num > max) {
+					max = now.num;
+					maxKey = now.name;
+				}
+			}
+
+			// 최고값
+			gen now = map.get(maxKey);
+			now.sort();
+			for (int j = 0; j < 2; j++) {
+				// 3. plays[i] 는 idx 가 적은값 : gen 2개에서 2개 plays 찾기
+
+				int v = now.plays.get(now.plays.size() - 1 - j);
+				System.out.println(v); //결과값 value 출력
+				answer[i * 2 + j] = v; // TODO : idx 출력으로 변경
+
+			}
+			now.num = -1; // pop 처리
+			
+		}
+
+//		
 		return answer;
 
 	}
