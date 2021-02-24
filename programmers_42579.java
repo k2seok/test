@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -10,22 +11,21 @@ public class programmers_42579 {
 	public static class gen {
 		String name = "";
 		int num;
-		Vector<Integer> plays = new Vector<Integer>();
+		Vector<int[]> plays = new Vector<int[]>();
 
-		public gen(String name, int num) {
+		public gen(String name, int i, int num) {
 			this.name = name;
 			this.num = num;
-			plays.add(num);
+			plays.add(new int[]{i,num});
 		}
 
 		public void sort() {
-			Arrays.sort(plays.toArray());
+//			Arrays.sort(plays.toArray(),);
 		}
 
 	}
 
 	public static int[] solution(String[] genres, int[] plays) {
-		genresCnt = 0;
 		int[] answer = new int[4];
 
 		HashMap<String, gen> map = new HashMap<String, gen>();
@@ -38,10 +38,10 @@ public class programmers_42579 {
 			if (map.containsKey(gen)) {// exist
 				gen now = map.get(gen);
 				now.num += plays[i];
-				now.plays.add(play);
+				now.plays.add(new int[]{i,play});
 
 			} else { // exist
-				map.put(gen, new gen(gen, play));
+				map.put(gen, new gen(gen, i, play));
 			}
 		}
 
@@ -62,9 +62,9 @@ public class programmers_42579 {
 			for (int j = 0; j < 2; j++) {
 				// 3. plays[i] 는 idx 가 적은값 : gen 2개에서 2개 plays 찾기
 
-				int v = now.plays.get(now.plays.size() - 1 - j);
-				System.out.println(v); //결과값 value 출력
-				answer[i * 2 + j] = v; // TODO : idx 출력으로 변경
+				//int v = now.plays.get(now.plays.size() - 1 - j); // TODO : 변경
+//				System.out.println(v); //결과값 value 출력
+//				answer[i * 2 + j] = v; // TODO : idx 출력으로 변경
 
 			}
 			now.num = -1; // pop 처리
