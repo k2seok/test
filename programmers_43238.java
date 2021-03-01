@@ -1,13 +1,13 @@
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Set;
 
 public class programmers_43238 {
-
+// Solution
 	/**
 	 * 
+		 이분탐색 : like 분할-정복
 		 
-		 완탐 , 가지치기
+		 완탐 , 가지치기 > 시간복잡도 n^2 은해결할 수 없는 문제, 
+		 이분탐색을 활용한 최소 nlogn 처리가 필요.
 		 
 		 tiems.sort()
 		 // 가장 오래걸리는 시간 ? 
@@ -34,24 +34,57 @@ public class programmers_43238 {
 
 	static int N = 0;
 	static long answer = 0;
+	static int maxIdx= 0;
 	public static long solution(int n, int[] times) {
 //		long answer = 0;
 		
+		n = 1000000000; // 문제발생!
+		Arrays.fill(times, 1);
 		N = n;
 		Arrays.sort(times);
-		
-//		1)
+		arr = times.clone();
+//		1) max value 
 		answer =  (long)(times[times.length-1]*n);
+		answer = Long.MAX_VALUE;
+		maxIdx = ((int)answer) < 0 ? Integer.MAX_VALUE : ((int)answer);
+		//1.1) max idx : answer 
 		
 		//2)
-		for (int cnt = n; cnt > 0; cnt--) {
-			recul(0,cnt, N);
-		}
+		recur(0,0, N);
+//		for (int cnt = n; cnt > 0; cnt--) {
+//		}
 		
 		return answer;
 	}
-	private static void recul(int idx, int pay, int cnt) {
+	private static void recur(int idx, int prevTime, int existCnt) {
 		//end : cnt-pay;    cnt - pay < 1 end : recul?  
+		if(idx >= arr.length || idx >= maxIdx)
+			return; // end recur
+		
+		for (int cnt = existCnt; cnt >0 ; cnt--) {
+			// cnt 만큼 입력
+			int nextCnt = existCnt - cnt;
+			int nowTime = arr[idx]*cnt;
+
+			if(nextCnt < 1)
+			{ // end Check :전체 시간 중 가장 오래걸린 시간 == 현재 걸린시간
+				prevTime = nowTime < prevTime ? prevTime : nowTime;
+				
+				if(answer < prevTime) // 더 확인할 필요 없음
+				{
+//					System.out.println("end " + idx);
+					break;
+				}
+				else { //new Min
+					
+					answer = prevTime;
+				}
+//				System.out.println(answer);
+			}else {
+				recur(idx+1, nowTime, nextCnt);
+			}
+			
+		}
 		
 	}
 
