@@ -6,46 +6,24 @@ public class programmers_43238 {
 	 * 
 		 이분탐색 : like 분할-정복
 		 
-		 완탐 , 가지치기 > 시간복잡도 n^2 은해결할 수 없는 문제, 
+		 완탐 , 가지치기 > 시간복잡도 n^2 은 해결할 수 없는 문제, 
 		 이분탐색을 활용한 최소 nlogn 처리가 필요.
 		 
-		 tiems.sort()
-		 // 가장 오래걸리는 시간 ? 
-		 mx : times[len(times)-1]* n
-		 
-		 tims에서 작은 p가 얼마나 빨리처리하는지가 중요.
-		 p0 을 가장 많이 사용한경우,  6 is 42
-		 p0 5 is 7*5
-		 p0 4 is 7*4  p1 20   .. 28
-		 p0 3 is 7*3  p1 30  ... 30   .. end
-		 
-		 1) max값 찾기
-		 2) 작은값부터 검색
-		 2.1) prevV < nextV  is end goto 2.
-		 
-		 
-		 
-		 6*10 : max
-		 1 :	min
-		 
-		 59
-		 29
-		 1 ~ 14 	15 ~ 29
-		 v = max;  
-		 
-		 min ~ v/2 -1 |  v/2 ~ v 
-		 v/7 + v/10  <= n 인경우, 더 큰 값필요 end
-		 else 범위에서 다시 검색
 		 
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		System.out.println(solution(6, new int[] {7,10}));
+		System.out.println(solution(1000000000, new int[] {1, 1000000000, 1000000000}));
+		//1000000000
 
+		System.out.println(solution(1000000000, new int[] {2,45,4,2,1,6,7,8,9,11}));
+//		System.out.println(solution(n, new int[] {2,45,4,2,1,6,7,8,9,11}));
 	}
 
 	static int[] arr;
+	static int[] arrCnt;
 
 	static int N = 0;
 	static int MAXV = 0;
@@ -54,14 +32,17 @@ public class programmers_43238 {
 	public static long solution(int n, int[] times) {
 //		long answer = 0;
 		
-//		n = 1000000000; // 문제발생!
-//		Arrays.fill(times, 1);
 		N = n;
+		answer = 0;
 		Arrays.sort(times);
 		arr = times.clone();
-		int max =times[times.length-1]*n;
-		if(max < 0) //max Int
-			max = Integer.MAX_VALUE;
+		int max = -1;
+		int idx = times.length-1;
+		while(max < 0) {
+			max = times[idx]*n;
+			if(max < 0) //max Int
+				idx--;
+		}
 		
 		bs(1,max);
 		
@@ -78,19 +59,51 @@ public class programmers_43238 {
 		
 		return answer;
 	}
-	private static void bs(int minV, int maxV) {
-		int mid = maxV/2;
+	private static void bs(long left, long right) {
+		
+		//right idx 줄이기
+		int idx = (int)Math.log10(right)+1;
+		idx++; // min is 2
+//		System.out.println(idx);
+		
+		long mid = (left + right)/idx; //30 10 15 20  3 2 1 
 		int v= 0;
 		for (int a : arr) {
+			if(a > mid) { // useless
+				break;
+			}
+			if(v > N) {
+				//branch
+				break;
+			}
 			v += mid/a;
 		}
+//		for (int idx = 0; idx < arr.length; idx++) {
+//			int a = arr[idx];
+////			int cnt = arrCnt[idx];
+//			int cnt = 1;
+//			if(a > mid) { // useless
+//				break;
+//			}
+//			v += mid/a*cnt;
+//		}
 		
-		if(v > N) {
+		if(left == right)
+			answer = left; //end
+		
+		if(answer > 0) //all End
+			return;
+		
+		
+		if(v < N) {
+			bs((mid == left ? right : mid), right);	// to right
+		}else if(v > N){
+			bs(left, (mid == right ? left : mid));	// to left
 		}else {
-			// TODO Auto-generated method stub
-			
+			//find : mid is answer
+			answer = mid;
 		}
-		
+			
 	}
 
 }
