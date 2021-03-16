@@ -1,17 +1,17 @@
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.List;
 
 public class programmers_42579 {
-
+//Solution
 	final static int IDX_MAX = 10000;
-	static int genresCnt;
-
+	
 	public static class gen {
 		String name = "";
 		int num;
-		Vector<int[]> plays = new Vector<int[]>();
+		List<int[]> plays = new ArrayList<int[]>();
 
 		public gen(String name, int i, int num) {
 			this.name = name;
@@ -21,12 +21,19 @@ public class programmers_42579 {
 
 		public void sort() {
 //			Arrays.sort(plays.toArray(),);
+			plays.sort(new Comparator<int[]>() {
+				@Override
+				public int compare(int[] o1, int[] o2) {
+					return o2[1] - o1[1] == 0 ? o1[0] - o2[0] : o2[1] - o1[1]; // DESC, 같은경우 idx ASC
+				}
+			});
 		}
 
 	}
 
 	public static int[] solution(String[] genres, int[] plays) {
-		int[] answer = new int[4];
+		int[] answer = new int[IDX_MAX];
+		int cnt = 0;
 
 		HashMap<String, gen> map = new HashMap<String, gen>();
 		// 1. 최고 재생된 장르 : plays[i]의 모든 gneres[i] 의 합
@@ -40,7 +47,7 @@ public class programmers_42579 {
 				now.num += plays[i];
 				now.plays.add(new int[]{i,play});
 
-			} else { // exist
+			} else { // not exist
 				map.put(gen, new gen(gen, i, play));
 			}
 		}
@@ -58,31 +65,46 @@ public class programmers_42579 {
 
 			// 최고값
 			gen now = map.get(maxKey);
-			now.sort();
-			for (int j = 0; j < 2; j++) {
-				// 3. plays[i] 는 idx 가 적은값 : gen 2개에서 2개 plays 찾기
-
-				//int v = now.plays.get(now.plays.size() - 1 - j); // TODO : 변경
-//				System.out.println(v); //결과값 value 출력
-//				answer[i * 2 + j] = v; // TODO : idx 출력으로 변경
+			if(now == null || max < 1) // 결과 없음
+				break;
+			now.sort();  // 정렬
+			System.out.println(Arrays.toString(now.plays.toArray()));
+			for (int j = 0; j < now.plays.size(); j++) {
+				if(j == 2) {
+					break; // 2개씩만 입력됨
+				}
+				
+				int idx = now.plays.get(j)[0]; // idx 가져오기
+				answer[cnt++] = idx;
 
 			}
 			now.num = -1; // pop 처리
+//			map.remove(maxKey);
 			
 		}
 
 //		
-		return answer;
+		return Arrays.copyOfRange(answer, 0, cnt);  // 1 <= answer.Len <=4
 
 	}
-
+	
 	public static void main(String[] args) {
 		String[] genres;
 		int[] plays;
 
-		genres = new String[] { "classic", "pop", "classic", "classic", "pop" };
-		plays = new int[] { 500, 600, 150, 800, 2500 };
-//				[4, 1, 3, 0]
-		solution(genres, plays);
+//		genres = new String[] { "classic", "pop", "classic", "classic", "pop" };
+//		genres = new String[] { "classic", "z", "classic"  };
+//		plays = new int[] { 1000, 500, 100}; // 1 2
+
+//		genres = new String[] {"pop", "pop", "pop", "rap", "rap"};
+////	    plays = new int[]{45,50,40, 60, 70}; // [ 1, 0, 4, 3]
+//	    plays = new int[]{45,45,40, 60, 70}; // [  0, 1, 4, 3]
+				
+	    
+	    //장르의 속한곡이 1개일 때 케이스 테스트
+		genres = new String[] {"a", "a", "a", "a", "a"};
+		plays = new int[] { 5, 5, 40, 5, 5}; // [ 1, 0, 4, 3]
+
+		System.out.println(Arrays.toString(solution(genres, plays)));
 	}
 }
