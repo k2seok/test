@@ -53,7 +53,7 @@ public class programmers_42579 {
 		}
 
 		// 2. 장르 내 가장 plays[i] 가 가장 큰 값 2개
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < map.size(); i++) {
 			int max = 0;
 			String maxKey = "";
 			for (gen now : map.values()) {
@@ -68,7 +68,6 @@ public class programmers_42579 {
 			if(now == null || max < 1) // 결과 없음
 				break;
 			now.sort();  // 정렬
-			System.out.println(Arrays.toString(now.plays.toArray()));
 			for (int j = 0; j < now.plays.size(); j++) {
 				if(j == 2) {
 					break; // 2개씩만 입력됨
@@ -84,7 +83,7 @@ public class programmers_42579 {
 		}
 
 //		
-		return Arrays.copyOfRange(answer, 0, cnt);  // 1 <= answer.Len <=4
+		return Arrays.copyOfRange(answer, 0, cnt);  // 1 <= answer.Len <= gen*2
 
 	}
 	
@@ -102,9 +101,16 @@ public class programmers_42579 {
 				
 	    
 	    //장르의 속한곡이 1개일 때 케이스 테스트
-		genres = new String[] {"a", "a", "a", "a", "a"};
+//		genres = new String[] {"a", "a", "a", "a", "a"};
+//		plays = new int[] { 5, 5, 40, 5, 5}; // [ 1, 0, 4, 3]
+
+
+	    //장르가 2개를 넘는 경우 : answer 는  1장르 * 2개씩 출력
+		genres = new String[] {"a", "b", "b", "c", "c"};
 		plays = new int[] { 5, 5, 40, 5, 5}; // [ 1, 0, 4, 3]
 
+		
+		
 		System.out.println(Arrays.toString(solution(genres, plays)));
 	}
 }
