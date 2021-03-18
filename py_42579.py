@@ -21,14 +21,14 @@ str(int) > convert to  String
 def solution(genres, plays):
     IDX_GEN = 10000;
     answer = [];
-    lst_Answer = [];
-    input_genres = [];
+    lst_Answer = [];# gen Name List
+    input_genres = []; 
     
     for i in range(0, len(genres)):
 #
         gen = genres[i];  # idx = 0;
         
-        if gen not in input_genres:  # not exist > append new
+        if gen not in input_genres:  # Name not exist > append new
             lst_Answer.append([gen, i]);
             input_genres.append(gen);
         else:  # exist
@@ -37,7 +37,8 @@ def solution(genres, plays):
                 if(gen == lst_Answer[idx][0]):
                     break;  # find genres Idx
                 idx += 1;
-            for j in range(1, len(lst_Answer[idx])):
+            for j in range(1, len(lst_Answer[idx])): # input now Idx genres
+                # sorting
                 prev = plays[lst_Answer[idx][j]];
                 nowV = plays[i];
                 if(prev < nowV):
@@ -48,7 +49,7 @@ def solution(genres, plays):
                    lst_Answer[idx].append(i);
         
     lst_max = [];
-    for _rank in range(0, 2):  # find genres rank until 2nd
+    for _rank in range(0, len(lst_Answer)):  # find genres rank all gen
         maxV = -1;
         idx = -1;
         # print(len(lst_Answer));
@@ -64,7 +65,7 @@ def solution(genres, plays):
                 idx = i;
         lst_max.append(idx); 
     
-    for _i in range(0, 2):  # pop rank genres until 2nd 
+    for _i in range(0, len(lst_Answer)):  # pop all gen best songs until 2nd   
         v = lst_max.pop(0);
         if(v < 0):
             break;
@@ -75,6 +76,10 @@ def solution(genres, plays):
             answer += now[1:3];
     #print(answer)
     return answer;
+
+#sol1_Answer = [4, 1, 3, 0];
+
+print(solution(["pop", "jazz", "jazz", "rap", "rap"], [5, 5, 40, 5, 5])) # 2 1 3 4 0
 
 '''
 #TestCase
