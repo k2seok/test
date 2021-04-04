@@ -1,83 +1,61 @@
-package tester;
 
 import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
 
 public class programmers_42895 {
 
 	/*
-	 * °³¼±¹æ¾È : map ¿¡ n À¸·Î °è»êÇÑ ¸ğµç °á°ú°ªÀ» ÀÔ·Â
-	 * map^2 ¸¸Å­ »çÄ¢¿¬»ê
-	 * ÀÛÀº¼ö³¢¸® °è»êÇÏ´Ù°¡, ÀÏÄ¡ÇÏ¸é ¹İÈ¯, ¾øÀ¸¸é -1
+	 * 
+	 * DP  :  1ë¶€í„° N ê¹Œì§€ ì‘ì€ê³„ì‚°, ê·¸ë¦¬ê³  ì´í›„ ê²°ê³¼í•©(memoization) ìœ¼ë¡œ ì¸í•œ ê°’ ë„ì¶œ.
+		1 ë§Œìœ¼ë¡œ ê°€ëŠ¥í•œì§€ í™•ì¸ ...  i  =  max ;  i  >  0 ; i--    &  j = max - i  ; j  > 0 ; j--;  >>>  ëª¨ë“  ì‚¬ì¹™ì—°ì‚°
+		2 ë§Œìœ¼ë¡œ ê°€ëŠ¥í•œì§€ í™•ì¸ >> memo[1]  memo[1]
+		3 ë§Œìœ¼ë¡œ ê°€ëŠ¥í•œì§€ í™•ì¸ >> memo[2]  memo [1] >> ì¤‘ë³µê°’ì´ ë°œìƒí•  ìˆ˜ ìˆìœ¼ë‹ˆ set ì²˜ë¦¬
+		n ë²ˆì§¸ì—ì„œ ê²°ê³¼ê°€ ë‚˜ì™”ëŠ”ì§€ check 
 	 */
-	public int solution(final int N, final int number) {
-//		int answer = -1;
-
+	static HashSet<Integer>[] memo = new HashSet[10];  // way using Arrays
+	static public int solution(final int N, final int number) {
 		
-		if(N == number)
-			return 1;
-		
-		
-		Vector<Set<Integer>> data = new Vector<Set<Integer>>();
-
-		
-		int[] arr = new int[9];
-		int idx = 1;
-		data.add(null); // 0¹ø idx ´Â null
-		for (int i = 1; i <= 11111111; i = i*10 + 1) {
-			Set<Integer> set =  new HashSet<Integer>();
-			set.add(i*N);
-			data.add(set);
-			
-			arr[idx] = i*N; 
-			if(i*N == number)
-				return idx;
-			idx++;
-		}
-		
-		//Á¤·Ä·Î »çÄ¢¿¬»ê ¼öÇà
-		for (int i = 1; i < 9; i++) {
-			for (int j = 1; j <= i; j++) {
-				int use =  i + j;
-				if(use > 8)
-					break;
-				data.get(use).add(arr[i] + arr[j]);
-				data.get(use).add(arr[i] - arr[j]);
-				data.get(use).add(arr[i] * arr[j]);
-
-				if(arr[j] > 0)
-					data.get(use).add(arr[i] / arr[j]);
-				
+		for (int i = 1; i < 9; i++) { // max : 8
+			StringBuffer b= new StringBuffer(); 
+			for (int j = 0; j < i; j++) {
+				b.append(N);
 			}
-		}
-		
-		//°á°ú ³¢¸® Àç¿¬»ê
-		for (int i = 1; i < 8; i++) {
-			for (int j = 1; j <= i; j++) {
-				final int use = i + j;
-				if(use > 8 || i > 7)
-					continue;
-				for (int a : data.get(i)) {
-					for (int b : data.get(j)) {
-						
-						data.get(use).add(a + b);
-						data.get(use).add(a - b);
-						data.get(use).add(a*b);
-
-						if(b > 0)
-							data.get(use).add(a/b);
-					}
-				}
-			}
-			
-			//°á°ú È®ÀÎ
-			if(data.get(i).contains(number))
+//			System.out.println(b);
+			cal(i, Integer.parseInt(b.toString()));
+			if(memo[i].contains(number)) // check
 				return i;
 		}
-		
-		
 		return -1;
+				
+	}
+
+	static private void cal(int idx, int v) {
+		if(memo[idx] == null) {
+			memo[idx] = new HashSet<Integer>();
+			memo[idx].add(v);
+		}
+		for (int i = idx; i > 0; i--) {
+			for (int j = idx - i; j > 0; j--) {
+				if(i + j > 8)
+					continue;
+				
+				for (int left : memo[i]) {
+					for (int right : memo[j]) {
+						memo[i+j].add(left * right);
+						memo[i+j].add(left + right);
+						if(left - right > 0)
+							memo[i+j].add(left - right);
+						if(right > 0)
+							memo[i+j].add(left / right);
+					}	
+				}
+			}
+		}
+		
+	}
+	
+	static public void main(String args[]) {
+		System.out.println(solution(5, 12)); // 4
+		System.out.println(solution(2, 11)); // 3
 	}
 
 }
