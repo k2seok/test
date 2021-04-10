@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.TreeSet;
+
 public class programmers_42861 {
 //Solution
 	public static void main(String[] args) {
@@ -18,13 +21,13 @@ public class programmers_42861 {
 	}
 
 	/**
-	 * 모든, 연결에서 최소의 연결값을 지정
-		goal: 모든 n 을 연결하였을때의 최소값을 찾기
-		트리구조로 생각, 시작노드를 찾는것이 중요, 내가 찾은 값이 최소라는 보장이 되는방법?
-		모든 cost를 더한값 : 최대값
-		최소 cost를 이용한값 : 최소값
-		1) answer = 최소 연결값을 찾아 합함
-		2) 1의 결과로 모든 연결이 이루어지지않음(visit == all? 1 : answer)
+	 * 모든, 연결에서 최소의 연결값을 지정 > 최소신장트리 (Minimum Spanning Tree)
+	 * 프림알고리즘 : 
+	 * 1)임의의 votex 에서 시작, 
+	 * 2)트리 내부의 두 votex가 선택되지않는한에서, 트리를 만들면서 간선을 잇는다. 
+	 * 2-1)간선은 최소가중치 부터 잇는다. (가중치 오름차순 정렬필요)
+	 * 3)모든 간선이 이어진 경우, MST가 이루어진다.
+	 * 
 	 * @param n
 	 * @param costs
 	 * @return
@@ -32,55 +35,30 @@ public class programmers_42861 {
 	public static int solution(int n, int[][] costs) {
 		int answer = 0;
 		
-		//init
-		int map[][] = new int[n][n];
-		for (int i = 0; i < costs.length; i++) {
-			final int I = costs[i][0];
-			final int J = costs[i][1];
-			final int V = costs[i][2];
-			map[I][J] = V;
-			map[J][I] = V;
-		}
-		int linkCount = 0;
-		boolean visit[] = new boolean[n];
+		//init TODO : 간선의 가중치를 만드는 알고리즘
+		TreeSet<Integer> tree = new TreeSet<Integer>();
 		
-		while(linkCount != n-1) {
-			//1
-			for (int i = 0; i < visit.length; i++) { // i 번 섬에서 최소이동길이 찾기
-				int minV = -1;
-				int idx = -1;
-				
-				for (int j = 0; j < n; j++) {
-					if(i == j || map[i][j] < 1 ) continue;
-					//get
-					minV = minV < 0 ? map[i][j] :  minV < map[i][j] ? minV : map[i][j];
-					if(minV == map[i][j])
-						idx = j;
-				}
-				
-				//find
-				if(idx > -1) {
-					answer += map[i][idx]; //link
-					linkCount++;
-					map[i][idx] = -1; // 비워주기
-					map[idx][i] = -1; // 비워주기
-					
-					if(!visit[i]) {
-						visit[i] = true;
-					}
-					
-					if(!visit[idx]) {
-						visit[idx] = true;
-					}
-				}
-				
-				if(linkCount == n -1) // end
-					break;
-			}
-			
-			
-			
+		int[] vArr = new int[costs.length];
+		int[] iArr = new int[costs.length];
+		for (int i = 0; i < costs.length; i++) {
+			vArr[i] = costs[i][2]; // v
 		}
+//		Arrays.sort(vArr);
+//		for (int i = 0; i < vArr.length; i++) {
+//			for (int j = 0; j < iArr.length; j++) {
+//			}
+//		}
+		
+		
+//		int linkCount = 0;
+//		boolean visit[] = new boolean[n];
+//		tree.add(0);
+//		
+//		while(tree.size() == n) {
+//			//1
+//			
+//		
+//		}
 		
 		return answer;
 	}
