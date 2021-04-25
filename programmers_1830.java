@@ -22,20 +22,42 @@ public class programmers_1830 {
     public static String solution(String sentence) {
         String answer = "";
         
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Vector<Integer>> map = new HashMap<String, Vector<Integer>>();
         
-        for (int i = 0; i < sentence.length; i++) {
+        String[] arrC = new String[24]; // Splitmax 
+        int countC = 0;
+        
+        for (int i = 0; i < sentence.length(); i++) {
         	char c = sentence.charAt(i);
 			
-        	if(c < 'A' || c > 'Z')
-        		map.put(c +"", i); //lastIdx
-        	
+        	if(c < 'A' || c > 'Z') {
+        		Vector<Integer> now = map.get(c+"");
+        		if(now == null) {
+        			now = new Vector<Integer>();
+        			arrC[countC++] = c +"";
+        		}
+        		now.add(i);
+        		map.put(c+"", now);
+        	}
 		}
         
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < countC; i++) {
+			Vector<Integer> now =  map.get(arrC[i]);
+			if(now.size() > 2) {
+				// rule1
+				String s = sentence.substring(now.get(0) -1, now.get(now.size()-1) +2); 
+				sb.append(s.replaceAll("[a-z]", ""));
+			}else {
+				// rule2
+				sb.append(sentence.substring(now.get(0) +1, now.get(now.size()-1)));
+			}
+			sb.append(" ");
+		}
         
+        System.out.println(sb.toString().trim());
         
-        
-        return answer;
+        return sb.toString().trim();
     }
 
 
