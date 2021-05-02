@@ -33,18 +33,18 @@ public class acmicpc_2805 {
 		
 		Arrays.sort(arr);
 		
-		int answer = 0;
+		long answer = 0;
 		boolean end = false;
-		int left = 1;
-		int right = arr[arr.length-1]-1; 
-		int cut = (left +right)/2; //중간값
+		long left = 1;
+		long right = arr[arr.length-1]-1; 
+		long cut = (left +right)/2; //중간값
 		while(!end) {
 			
 			long r = 0; // r MAX :  10^9 * 10^6
 			int count = 0;
 			//check
 			for (int  a : arr) {
-				int v = a - cut < 0 ? 0 : a - cut;
+				long v = a - cut < 0 ? 0 : a - cut;
 				if(v> 0) {
 					r+=v;
 					count++;
@@ -57,13 +57,19 @@ public class acmicpc_2805 {
 //				}
 			}
 			
-			if(r>= M) {
-				// more
-				left++; // mid + 1 || left + 1
+			if(answer == cut)
+				end = true;
+			if(r> M) {
+				// more cut
+				long ng = (r - M)/count;  // enough average;
+				cut += ng;
+				answer = cut;
 			}else {
-				// r< M
-				right--;
+				// r< M //
+				long ng = M - r == 0 ? 1 : M - r; 
+				cut-= ng;
 			}
+			
 			for (int i = 0; i < args.length; i++) {
 				
 			}
