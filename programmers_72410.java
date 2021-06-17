@@ -9,8 +9,7 @@ public class programmers_72410 {
 
 	
 	/**
-	 * regex�� Ȱ���� ���ڿ� ��ȯ
-	 * rule 7�� ����  ����
+	 * rule 7개순차 구현
 	 * @param new_id
 	 * @return
 	 */
